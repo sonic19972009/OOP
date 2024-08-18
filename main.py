@@ -7,12 +7,23 @@ class Student:
         self.courses_in_progress = []
         self.grades = {}
 
+    def rate_lecturer(self, lector, course, grade):
+        if (isinstance(lector, Lecturer) and course in lector.courses_attached and course in self.courses_in_progress
+                and grade in range(0, 11)):
+            if course in lector.grades:
+                lector.grades[course] += [grade]
+            else:
+                lector.grades[course] = [grade]
+        else:
+            return 'Ошибка'
+
 
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
         self.courses_attached = []
+        self.grades = {}
 
 
 class Lecturer(Mentor):
